@@ -46,21 +46,37 @@
 
         .mycards {
             width: 1200px;
+            margin: 30px auto 0px auto;
+        }
+
+        .commentingbox {
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
 
             margin: 30px auto 0px auto;
         }
 
-        .mypostingbox {
-            width: 500px;
+     
 
-            margin: 30px auto 0px auto;
 
-            padding: 20px;
-            box-shadow: 0px 0px 3px 0px blue;
-            border-radius: 5px;
-
+        #comment {
+            width: 1000px;
 
         }
+
+        #postingbtn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 55px;
+            margin-bottom: 16px;
+        }
+
+
 
         .mybtn {
             display: flex;
@@ -71,6 +87,36 @@
 
         .mybtn>button {
             margin-right: 5px;
+        }
+
+
+        table {
+            width: 70%;
+            border-collapse: separate;
+            border-spacing: 10;
+            margin: 20px auto;
+            border: none;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.538);
+        }
+
+        table th,
+        table td {
+            border: 0.5px solid black;
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        thead {
+            background-color: #967272;
+            color : white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -96,6 +142,42 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+
+        $("#postingbtn").click(async function () { // 데이터를 넣기 위함 (특정 태그 클릭 시 실행)
+
+            let name = $('#name').val();
+            let comment = $('#comment').val();
+
+            let doc = {
+                'name': name,
+                'comment': comment,
+
+            }; // 넣고 싶은 데이터
+            await addDoc(collection(db, "comments"), doc);
+            alert('작성 되었습니다.');
+            window.location.reload();
+        })
+
+
+
+
+
+        let docs = await getDocs(collection(db, "comments")); // 이전에 넣은 albums 에서 가져온다.
+        docs.forEach((doc) => {
+            let row = doc.data();
+
+            let name = row['name']; // 위의 console 바탕으로 데이터를 가져온다.
+            let comment = row['comment'];
+
+
+            let temp_html = `
+                <tr>
+                    <td>${name}</td><td>${comment}</td>
+                </tr>
+
+           `;
+            $('#comments').append(temp_html);
+        });
 
 
     </script>
@@ -124,8 +206,35 @@
     </div>
 
     <div>
-        <h2>댓글</h2>
+        <h2 style="text-align: center; margin-bottom: 100px;">댓글</h2>
+        <div class="commentingbox" id="commentbox">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="name" placeholder="이름 또는 닉네임">
+                <label for="floatingInput">이름 또는 닉네임</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="comment" placeholder="댓글 작성">
+                <label for="floatingInput">댓글</label>
+            </div>
+            <div class="mybtn">
+                <button id="postingbtn" type="button" class="btn btn-danger">작성하기</button>
+            </div>
+        </div>
     </div>
+    <table>
+        <thead>
+            <tr>
+                <th>작성자</th>
+                <th>내용</th>
+            </tr>
+        </thead>
+        <tbody id="comments">
+            <tr>
+                <td>이름1</td>
+                <td>내용1</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 
 </html>
