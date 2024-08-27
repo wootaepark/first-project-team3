@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경사남넷-소개페이지</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+
+        * {
+            font-family: "Jua", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /*삼대장 이미지 배너 style*/
+        .meam {
+            height: 700px;
+           
+            background-position: center;
+            background-size: cover;
+            border: 3px outset;
+        }
+
+
+        /*경서남넷 타이틀 바 */
+        .mytitle {
+            height: 100px;
+            color: black;
+            /*글자 외곽 테두리*/
+            text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background-image:
+                url(https://cdn-icons-png.flaticon.com/512/4372/4372820.png);
+            background-position: center;
+            background-position-x: 38%;
+            background-repeat: no-repeat;
+            background-size: 8%;
+        }
+
+        /*팀원 카드형 자기소개 style*/
+        .miniinfo {
+            border: 3px outset;
+            background-image:
+                url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4IgfcfKetAn4S4nQ-kg0Ih2fuBBWDdiI34A&s);
+            background-position: center;
+            background-size: 10%;
+
+        }
+
+        .card {
+            margin: 0 auto;
+        }
+
+        /*텍스트에어리어 style 부분*/
+        .teaminfo {
+            border: 3px outset;
+            background-color: beige;
+        }
+
+        .goal {
+            border: 3px outset;
+            background-color: beige;
+        }
+
+        .mytitle>button {
+            width: 150px;
+            height: 50px;
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+
+
+            margin-top: 20px;
+        }
+
+        .mycards {
+            width: 1200px;
+
+            margin: 30px auto 0px auto;
+        }
+
+        .mypostingbox {
+            width: 500px;
+
+            margin: 30px auto 0px auto;
+
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px blue;
+            border-radius: 5px;
+
+
+        }
+
+        .mybtn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mybtn>button {
+            margin-right: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module">
+
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA9pQiIwlqJTL-3TSQEZVLZ3UDHC9D16FY",
+            authDomain: "sparta-930ba.firebaseapp.com",
+            projectId: "sparta-930ba",
+            storageBucket: "sparta-930ba.appspot.com",
+            messagingSenderId: "389048733686",
+            appId: "1:389048733686:web:c4b543e7955288c4f801d7",
+            measurementId: "G-QEPKG50DSH"
+        };
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="mytitle">
+        <h1>경 사 남 넷</h1>
+    </div>
+    <div class="meam">
+        <img src="https://velog.velcdn.com/images/lionjojo/post/96cf927c-cce0-4064-80d9-1163466bf36b/image.png">
+    </div>
+    <!-- 팀원 자기소개 카드 부분 style을 최적화를 못해서 따로말해주시면 제가 바꾸겠습니다.-->
+    <div class="miniinfo">
+        <div class="row row-cols-1 row-cols-md-5 g4">
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset; background-color: rgb(216, 156, 83); text-align:center">박 태 우</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/4022d0df-f4ea-478e-a1c0-0406e22cf659/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige; height: 50px; font-size: 200%; text-align:center">개발 딱 대!
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
+                        DEF/?</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">윤 영 한</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/5441ae79-fe00-439f-a255-9fdec2d26d96/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige;height: 50px; font-size: 150% ">뜨겁게 간다. 화상주의
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black;background-color: beige;">ATK/?
+                        DEF/?</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">이 지 훈</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/2b3cc818-dbd5-45f5-888e-9271a0201bd1/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige;height: 50px; font-size: 200%; text-align:center">헤 으 응
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black;background-color: beige;">ATK/?
+                        DEF/?</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">조 성 준</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/1bf1f5a8-da42-4d5c-b8e6-d01e6795eb5c/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige;height: 50px; font-size: 130% ">이 카드는 그냥 개발을 잘함
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black;background-color: beige; ">ATK/?
+                        DEF/?</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 팀 설명란 CSS는 자유롭게 바꾸시면될거같습니다.-->
+    <div class="teaminfo">
+        <h2 style="border: 3px outset;background-color: rgb(230, 129, 7);">팀 설 명</h2>
+        <h2>경상도와 경기도라는 먼 지역에서 만났지만 마치 예전부터 알고 지냈던 사람처럼 화목하게 지내면서 프로젝트에 열정적으로 참여하는 모습에 이렇게 만난 것이 행운이 아닌가 싶은 기쁜 마음에
+            ‘경사났네’를 표현하는 말입니다. 그리고 팀명을 통해서 좋은 결과를 만들어 내자는 각오를 의미하고 있습니다. </h2>
+    </div>
+    <!-- 목표부분.-->
+    <div clsas="goal">
+        <h2>목표나 한마디</h2>
+        <h3>
+            <pre>
+박태우:
+윤영한:
+이지훈:
+조성준:
+            </pre>
+        </h3>
+    </div>
+    <!-- 팀규칙 부분.-->
+    <div class="teamPromise">
+        <h2>우리팀의 규칙</h2>
+        <h3>
+            <pre>
+1.
+2.
+3.
+4.
+</h3></pre>
+    </div>
+    <!-- 방명록기능-->
+    <div>
+        <h2>댓글</h2>
+    </div>
+</body>
+
+</html>
