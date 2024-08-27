@@ -17,9 +17,23 @@
             font-style: normal;
         }
 
+
+        /*삼대장 이미지 배너 style*/
+        .meam {
+            height: 700px;
+            background-image:
+                url(https://blog.kakaocdn.net/dn/dN9KlG/btqwWo4cjmE/lsXvkMBkTTLZqnOpT1Wupk/img.jpg);
+            background-position: center;
+            background-size: cover;
+            border: 3px outset;
+        }
+
+        /*경서남넷 타이틀 바 */
         .mytitle {
-            height: 250px;
-            color: ivory;
+            height: 100px;
+            color: black;
+            /*글자 외곽 테두리*/
+            text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
 
             display: flex;
             flex-direction: column;
@@ -27,22 +41,12 @@
             justify-content: center;
 
             background-image:
-                url(https://png.pngtree.com/thumb_back/fh260/background/20230426/pngtree-small-road-in-korean-traditional-house-at-sunset-image_2520697.jpg);
+                url(https://cdn-icons-png.flaticon.com/512/4372/4372820.png);
             background-position: center;
-            background-size: cover;
+            background-size: 10%;
         }
 
-        .mytitle>button {
-            width: 150px;
-            height: 50px;
-            background-color: transparent;
-            color: white;
-            border: 1px solid white;
-            border-radius: 5px;
 
-
-            margin-top: 20px;
-        }
 
         .mycards {
             width: 1200px;
@@ -59,14 +63,51 @@
             margin: 30px auto 0px auto;
         }
 
-     
+        /*팀원 카드형 자기소개 style*/
+        .miniinfo {
+            border: 3px outset;
+            background-image:
+                url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4IgfcfKetAn4S4nQ-kg0Ih2fuBBWDdiI34A&s);
+            background-position: center;
+            background-size: 10%;
+
+        }
 
 
+        .card {
+            margin: 0 auto;
+        }
+
+        /*텍스트에어리어 style 부분*/
+        .teaminfo {
+            border: 3px outset;
+            background-color: beige;
+        }
+
+        .goal {
+            border: 3px outset;
+            background-color: beige;
+        }
+
+        .mycards {
+            width: 1200px;
+
+            margin: 30px auto 0px auto;
+        }
+
+
+
+
+        /*아래는 댓글 관련 css*/
+
+
+        /* 댓글 입력 구역 너비*/
         #comment {
             width: 1000px;
 
         }
 
+        /* 댓글 작성 버튼 스타일 , jQuery 이용을 위한 id 값 부여*/
         #postingbtn {
             display: flex;
             flex-direction: row;
@@ -78,18 +119,11 @@
 
 
 
-        .mybtn {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mybtn>button {
-            margin-right: 5px;
-        }
 
 
+
+
+        /* 댓글 테이블 스타일*/
         table {
             width: 70%;
             border-collapse: separate;
@@ -98,7 +132,7 @@
             border: none;
             border-radius: 5px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.538);
+
         }
 
         table th,
@@ -107,15 +141,64 @@
             padding: 5px;
             text-align: center;
             border-radius: 5px;
+
+
         }
 
+
+        /*짝수줄, 홀수줄 마다 색을 다르게 함, 타이틀 바 색깔 설정*/
         thead {
-            background-color: #967272;
-            color : white;
+            background-color: #6d4f2c;
+            color: white;
         }
 
-        tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
+        
+
+        /* 댓글 내용과 삭제 버튼 정렬 */
+        .comment-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+
+        /*댓글 페이지 뒷 배경 설정*/
+        .comment-space {
+            background-image: url(https://i.pinimg.com/1200x/a8/ef/cd/a8efcd85adf5fde3bb76832bea40fdd1.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            margin: 30px auto 0px auto;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            
+        }
+
+
+
+
+
+
+
+        /* 테이블의 작성자 스타일*/
+        .name-column {
+            width: 20%;
+
+        }
+
+        /*테이블의 내용 스타일*/
+        .content-column {
+            width: 70%;
+
+        }
+
+        /* 세 번째 컬럼의 테두리 제거 */
+        .action-column {
+            width: 10%;
+            text-align: center;
+            border: none;
 
         }
     </style>
@@ -127,6 +210,7 @@
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyA9pQiIwlqJTL-3TSQEZVLZ3UDHC9D16FY",
@@ -162,21 +246,58 @@
 
 
 
-        let docs = await getDocs(collection(db, "comments")); // 이전에 넣은 albums 에서 가져온다.
-        docs.forEach((doc) => {
-            let row = doc.data();
+        $(document).ready(async function () {
+            let docs = await getDocs(collection(db, "comments"));
+            let commentCount = 0;
 
-            let name = row['name']; // 위의 console 바탕으로 데이터를 가져온다.
-            let comment = row['comment'];
+            docs.forEach((doc) => {
+                commentCount++;
+                let row = doc.data();
+                let name = row['name'];
+                let comment = row['comment'];
+                let docId = doc.id;
+
+                let temp_html = `
+                    <tr id="comment-${docId}">
+                        <td>${name}</td>
+                        <td id="comment-area">${comment}
+                            </td>
+                            <td class="action-column"><button class="btn btn-danger" data-id="${docId}" id="delete-btn">삭제</button></td>
+                    </tr>
+                    
+                    
+                `;
+                $('#comments').append(temp_html);
+            });
+
+            if (commentCount === 0) {
+                $('table').hide();
+            } else {
+                $('table').show();
+            }
+        });
 
 
-            let temp_html = `
-                <tr>
-                    <td>${name}</td><td>${comment}</td>
-                </tr>
+        // 삭제 기능 구현
+        $(document).on('click', '#delete-btn', async function () {
 
-           `;
-            $('#comments').append(temp_html);
+
+            let answer = confirm('정말로 삭제하시겠습니까?');
+            if (answer) {
+                let docId = $(this).data('id');
+                await deleteDoc(doc(db, "comments", docId));
+                $(`comment-${docId}`).remove();
+                alert('삭제되었습니다.');
+                window.location.reload();
+
+            }
+            else {
+                alert('삭제를 취소합니다.');
+            }
+
+
+
+
         });
 
 
@@ -189,52 +310,131 @@
 
     </div>
 
-    <div style="margin-bottom: 200px">
-        <h2>밈 사진</h2>
+    <div class="meam">
     </div>
-
-    <div style="margin-bottom: 200px">
-        <h2>각자 소개 카드</h2>
-    </div>
-
-    <div style="margin-bottom: 200px">
-        <h2>팀설명</h2>
-    </div>
-
-    <div style="margin-bottom: 200px">
-        <h2>목표나 한마디</h2>
-    </div>
-
-    <div>
-        <h2 style="text-align: center; margin-bottom: 100px;">댓글</h2>
-        <div class="commentingbox" id="commentbox">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="name" placeholder="이름 또는 닉네임">
-                <label for="floatingInput">이름 또는 닉네임</label>
+    <!-- 팀원 자기소개 카드 부분 style을 최적화를 못해서 따로말해주시면 제가 바꾸겠습니다.-->
+    <div class="miniinfo">
+        <div class="row row-cols-1 row-cols-md-5 g4">
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset;">Card title</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://i.namu.wiki/i/mVbvSl2j-zdEzqQQgq8RX1Sv7TUUlzR41DjSQfdOzgVDdMLRQyZ2VtCXE2HyX1DW0lMOuE6BeUwzaW9ETAGT2g.webp"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige;">이 카드는 그냥 개발을 잘함
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
+                        DEF/?</a>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="comment" placeholder="댓글 작성">
-                <label for="floatingInput">댓글</label>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset;">Card title</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://i.namu.wiki/i/mVbvSl2j-zdEzqQQgq8RX1Sv7TUUlzR41DjSQfdOzgVDdMLRQyZ2VtCXE2HyX1DW0lMOuE6BeUwzaW9ETAGT2g.webp"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige;">이 카드는 그냥 개발을 잘함
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black;background-color: beige;">ATK/?
+                        DEF/?</a>
+                </div>
             </div>
-            <div class="mybtn">
-                <button id="postingbtn" type="button" class="btn btn-danger">작성하기</button>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset;">Card title</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://i.namu.wiki/i/mVbvSl2j-zdEzqQQgq8RX1Sv7TUUlzR41DjSQfdOzgVDdMLRQyZ2VtCXE2HyX1DW0lMOuE6BeUwzaW9ETAGT2g.webp"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige;">이 카드는 그냥 개발을 잘함
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black;background-color: beige;">ATK/?
+                        DEF/?</a>
+                </div>
             </div>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title" style="border: 3px outset;">Card title</h5>
+                <p class="star">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://i.namu.wiki/i/mVbvSl2j-zdEzqQQgq8RX1Sv7TUUlzR41DjSQfdOzgVDdMLRQyZ2VtCXE2HyX1DW0lMOuE6BeUwzaW9ETAGT2g.webp"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text" style="border: 3px outset; background-color: beige;">이 카드는 그냥 개발을 잘함
+                    </p>
+                    <a href="#" class="btn btn-primary"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black;background-color: beige;">ATK/?
+                        DEF/?</a>
+                </div>
+            </div>
+
         </div>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>작성자</th>
-                <th>내용</th>
-            </tr>
-        </thead>
-        <tbody id="comments">
-            <tr>
-                <td>이름1</td>
-                <td>내용1</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- 팀 설명란 CSS는 자유롭게 바꾸시면될거같습니다.-->
+    <div class="teaminfo">
+        <h2 style="border: 3px outset;background-color: rgb(230, 129, 7);">팀 설 명</h2>
+        <h2>경상도와 경기도라는 먼 지역에서 만났지만 마치 예전부터 알고 지냈던 사람처럼 화목하게 지내면서 프로젝트에 열정적으로 참여하는 모습에 이렇게 만난 것이 행운이 아닌가 싶은 기쁜 마음에
+            ‘경사났네’를 표현하는 말입니다. 그리고 팀명을 통해서 좋은 결과를 만들어 내자는 각오를 의미하고 있습니다. </h2>
+    </div>
+    <!-- 목표부분.-->
+    <div clsas="goal">
+        <h2>목표나 한마디</h2>
+        <h3>
+            <pre>
+                박태우:
+                윤영한:
+                이지훈:
+                조성준:
+            </pre>
+        </h3>
+    </div>
+    <!-- 팀규칙 부분.-->
+    <div class="teamPromise">
+        <h2>우리팀의 규칙</h2>
+        <h3>
+            <pre>
+                1.
+                2.
+                3.
+                4.
+</h3></pre>
+    </div>
+
+
+
+    <!-- 방명록기능-->
+    <div class="comment-space">
+        <div>
+            <h2 style="text-align: center; margin-bottom: 100px;">댓글</h2>
+            <div class="commentingbox" id="commentbox">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="이름 또는 닉네임">
+                    <label for="floatingInput">이름 또는 닉네임</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="comment" placeholder="댓글 작성">
+                    <label for="floatingInput">댓글</label>
+                </div>
+                <div class="mybtn">
+                    <button id="postingbtn" type="button" class="btn btn-primary">작성하기</button>
+                </div>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="name-column">작성자</th>
+                    <th class="content-column">내용</th>
+                </tr>
+            </thead>
+            <tbody id="comments">
+
+            </tbody>
+        </table>
+</body>
+
+</html>
+</div>
 </body>
 
 </html>
