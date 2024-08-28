@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자기소개 페이지</title>
+    <style>
+        body {
+            background-image: url('https://e1.pxfuel.com/desktop-wallpaper/722/214/desktop-wallpaper-micgael-wingender-on-yugioh-mago-negro-yu-gi-oh.jpg');
+
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            background: linear-gradient(180deg, rgba(13, 2, 168, 0.877) 0%, rgba(50, 127, 216, 0.947) 52%, rgba(0, 2, 60, 0.896796218487395) 100%);
+            display: flex;
+            flex: 1;
+            padding: 30px;
+            border: 2px solid rgb(0, 0, 0);
+            margin: 10px auto 0px auto;
+            box-sizing: border-box;
+        }
+
+        .left-side {
+            box-shadow: 0 0 10px 10px white;
+            margin-left: 100px;
+            background: linear-gradient(180deg, rgba(240, 154, 63, 0.877) 0%, rgba(227, 163, 66, 0.9472163865546218) 52%, rgba(181, 106, 0, 0.896796218487395) 100%);
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+
+        .right-side {
+
+            box-shadow: 0 0 10px 10px white;
+            margin: 0px auto 0px auto;
+            background-color: rgb(241, 229, 206);
+            width: 40%;
+            padding: 10px;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+
+        .name {
+
+            font-size: 40px;
+            color: #271600;
+            text-shadow: 2px 2px 2px #fff, -1px -1px 2px #666;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 20px;
+
+
+            text-align: center;
+            padding: 10px;
+            box-shadow: 3px 3px 3px 3px rgb(87, 50, 1);
+            border-radius: 5px;
+            border: 2px solid rgba(240, 154, 63, 0.021);
+        }
+
+        .star {
+            text-shadow: 3px 3px rgb(107, 0, 0);
+            width: 480px;
+            font-size: 170%;
+            margin: 0px 0px 10px 470px;
+        }
+
+        .photo {
+            background-color: linear-gradient(180deg, rgba(199, 103, 0, 0.877) 0%, rgba(227, 163, 66, 0.9472163865546218) 52%, rgba(181, 106, 0, 0.896796218487395) 100%);
+            width: 400px;
+            margin: 0px auto 30px auto;
+            padding: 7px;
+            border-radius: 3px;
+            box-shadow: 2px 2px 3px 2px;
+
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid rgb(0, 0, 0);
+        }
+
+        .photo img {
+            border-radius: 5px;
+
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+
+
+        .intro {
+            background-color: rgba(241, 229, 206, 0.781);
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .popup-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .popup-links li {
+            padding: 10px 0;
+        }
+
+        .popup-links li button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .footer {
+            padding: 10px;
+            text-align: center;
+            border-top: 2px solid black;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left-side">
+            <div class="name"><strong>
+                    <입문> 이지훈
+                </strong></div>
+
+            <div class="star">
+                <p> ⭐⭐</p>
+            </div>
+
+            <div class="photo"><img
+                    src="https://teamsparta.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2F97e76ede-9f9d-4a77-a0f0-4b068d201d77%2FKakaoTalk_20240805_150046392.jpg?table=block&id=d02d62fd-1983-445e-b251-4f497dc3de8a&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=580&userId=&cache=v2"
+                    class="card-img-top" alt="..."></div>
+
+            <div class="intro">
+                <h2> <strong>책을 사랑하는 따뜻한 남자. <br>하지만 코드 앞에선 차가운 킬러.</strong></h2>
+                <p> <strong>밝은 인상과 더불어 훌륭한 언변으로 헙엽능력이 뛰어나며 문제에 대한 원인을 분석하고 이를 해결하고자 하는데 
+                    엄청난 집중과 끈기를 보여준다. 그에게 코딩 능력까지 갖춰진다면 어떨지 앞으로의 전망에 기대가 된다.</strong></p>
+                
+
+
+            </div>
+        </div>
+
+        <div class="right-side">
+            <ul class="popup-links">
+                <h3>사용할 수 있는 언어</h3>
+                <p>아직 없음</p>
+
+                <h3>나의 MBTI</h3>
+
+                <p>노력형 INFP </p>
+
+                <h3>취미</h3>
+                <p>독서 , 게임</p>
+
+                <h3>블로그</h3>
+                <p>https://velog.io/@hoon09231/posts</p>
+
+                <h3>자기소개 한마디</h3>
+                <p>
+                    분위기 맞춰서 눈치껏 행동함. <br>
+                    <br>
+                    자기계발서 읽는 것을 좋아함. <br>
+                    <br>
+                    활발한 분위기를 좋아하는 편.
+                </p>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <button onclick="history.back()">뒤로가기</button>
+    </div>
+
+    <script>
+
+
+
+
+    </script>
+
+</body>
+
+</html>

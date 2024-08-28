@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자기소개 페이지</title>
+    <style>
+        body {
+            background-image: url('https://e1.pxfuel.com/desktop-wallpaper/722/214/desktop-wallpaper-micgael-wingender-on-yugioh-mago-negro-yu-gi-oh.jpg');
+
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            background: linear-gradient(180deg, rgba(13, 2, 168, 0.877) 0%, rgba(50, 127, 216, 0.947) 52%, rgba(0, 2, 60, 0.896796218487395) 100%);
+            display: flex;
+            flex: 1;
+            padding: 30px;
+            border: 2px solid rgb(0, 0, 0);
+            margin: 10px auto 0px auto;
+            box-sizing: border-box;
+        }
+
+        .left-side {
+            box-shadow: 0 0 10px 10px white;
+            margin-left: 100px;
+            background: linear-gradient(180deg, rgba(240, 154, 63, 0.877) 0%, rgba(227, 163, 66, 0.9472163865546218) 52%, rgba(181, 106, 0, 0.896796218487395) 100%);
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+
+        .right-side {
+
+            box-shadow: 0 0 10px 10px white;
+            margin: 0px auto 0px auto;
+            background-color: rgb(241, 229, 206);
+            width: 40%;
+            padding: 10px;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+
+        .name {
+
+            font-size: 40px;
+            color: #271600;
+            text-shadow: 2px 2px 2px #fff, -1px -1px 2px #666;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 20px;
+
+
+            text-align: center;
+            padding: 10px;
+            box-shadow: 3px 3px 3px 3px rgb(87, 50, 1);
+            border-radius: 5px;
+            border: 2px solid rgba(240, 154, 63, 0.021);
+        }
+
+        .star {
+            text-shadow: 3px 3px rgb(107, 0, 0);
+            width: 480px;
+            font-size: 170%;
+            margin: 0px 0px 10px 300px;
+        }
+
+        .photo {
+            background-color: linear-gradient(180deg, rgba(199, 103, 0, 0.877) 0%, rgba(227, 163, 66, 0.9472163865546218) 52%, rgba(181, 106, 0, 0.896796218487395) 100%);
+            height: 500px;
+            margin: 0px auto 30px auto;
+            padding: 7px;
+            border-radius: 3px;
+            box-shadow: 2px 2px 3px 2px;
+
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid rgb(0, 0, 0);
+        }
+
+        .photo img {
+            border-radius: 5px;
+
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+
+
+        .intro {
+            background-color: rgba(241, 229, 206, 0.781);
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .popup-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .popup-links li {
+            padding: 10px 0;
+        }
+
+        .popup-links li button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .footer {
+            padding: 10px;
+            text-align: center;
+            border-top: 2px solid black;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left-side">
+            <div class="name"><strong>
+                    <초보> 조성준
+                </strong></div>
+
+            <div class="star">
+                <p> ⭐⭐⭐⭐⭐⭐⭐</p>
+            </div>
+
+            <div class="photo">
+                <img src="https://velog.velcdn.com/images/hoon09231/post/0171d9dc-bbff-4f34-8e29-71c2744fa0d6/image.jpg"
+                    class="card-img-top" alt="...">
+            </div>
+
+            <div class="intro">
+                <h2> <strong>완벽한 동선. 효율 그 자체.</strong></h2>
+                <p> <strong>부드러운 인상을 보여주지만 그의 수행능력은 감히 컴퓨터 그 자체라고 할 수 있다.</strong></p>
+                <p> <strong>파워 J에서 뿜어져나오는 빠른 정리와 기록 능력으로 체계적인 스케줄 관리와 신속한 업무수행을 자랑하고 있다.
+                </strong></p>
+                
+
+                <div class="buttons">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="right-side">
+            <ul class="popup-links">
+                <h3>사용할 수 있는 언어</h3>
+                <p>JAVA, SQL, NoSQL</p>
+
+                <h3>나의 MBTI</h3>
+
+                <p>ISTJ </p>
+
+                <h3>취미</h3>
+                <p>- 친구들과 같이 게임하거나 여행을 다니고 술을마시는 등 누군가와 함께 좋은걸 공유하는걸 좋아합니다.<br>
+                    <br>
+                    - 무언가 원리를 찾아내고 조립하고 완성해내는걸 좋아합니다. 그래서 코딩을 택하게 된것 같습니다.
+                </p>
+
+                <h3>블로그</h3>
+                <p>https://velog.io/@lionjojo/posts</p>
+
+                <h3>자기소개 한마디</h3>
+                <p>
+                    - 게임개발사에서 일을하다 계약사정으로 인해 다른곳에서 일을하던 중 다시 개발자가 하고싶어 이번캠프로 돌아왔습니다. 다시 돌아온만큼 본캠프에서도 노력하려합니다.<br>
+                    <br>
+                    - 흥미를 가진걸 최대한 파내려가는걸 좋아합니다. 코딩과 부트캠프도최대한 흥미를 잃지않고 열심히 화이팅!!
+                </p>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <button onclick="history.back()">뒤로가기</button>
+    </div>
+
+    <script>
+
+
+
+
+    </script>
+
+</body>
+
+</html>
