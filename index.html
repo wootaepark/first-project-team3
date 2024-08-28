@@ -17,9 +17,23 @@
             font-style: normal;
         }
 
+
+        /*삼대장 이미지 배너 style*/
+        .meam {
+            height: 700px;
+            background-image:
+                url(https://velog.velcdn.com/images/lionjojo/post/96cf927c-cce0-4064-80d9-1163466bf36b/image.png);
+            background-position: center;
+            background-size: cover;
+            border: 3px outset;
+        }
+
+        /*경서남넷 타이틀 바 */
         .mytitle {
-            height: 250px;
-            color: ivory;
+            height: 100px;
+            color: black;
+            /*글자 외곽 테두리*/
+            text-shadow: -1px 0px white, 0px 1px white, 1px 0px white, 0px -1px white;
 
             display: flex;
             flex-direction: column;
@@ -27,9 +41,11 @@
             justify-content: center;
 
             background-image:
-                url(https://png.pngtree.com/thumb_back/fh260/background/20230426/pngtree-small-road-in-korean-traditional-house-at-sunset-image_2520697.jpg);
+                url(https://cdn-icons-png.flaticon.com/512/4372/4372820.png);
             background-position: center;
-            background-size: cover;
+            background-position-x: 38%;
+            background-repeat: no-repeat;
+            background-size: 8%;
         }
 
         .mytitle>button {
@@ -42,6 +58,51 @@
 
 
             margin-top: 20px;
+        }
+
+
+
+
+
+        .mycards {
+            width: 1200px;
+            margin: 30px auto 0px auto;
+        }
+
+        .commentingbox {
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin: 30px auto 0px auto;
+        }
+
+        /*팀원 카드형 자기소개 style*/
+        .miniinfo {
+            border: 3px outset;
+            background-image:
+                url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4IgfcfKetAn4S4nQ-kg0Ih2fuBBWDdiI34A&s);
+            background-position: center;
+            background-size: 10%;
+
+        }
+
+
+        .card {
+            margin: 0 auto;
+        }
+
+        /*텍스트에어리어 style 부분*/
+        .teaminfo {
+            border: 3px outset;
+            background-color: beige;
+        }
+
+        .goal {
+            border: 3px outset;
+            background-color: beige;
         }
 
         .mycards {
@@ -62,15 +123,283 @@
 
         }
 
-        .mybtn {
+
+
+
+        /*아래는 댓글 관련 css*/
+
+
+        /* 댓글 입력 구역 너비*/
+        #comment {
+            width: 1000px;
+
+        }
+
+        /* 댓글 작성 버튼 스타일 , jQuery 이용을 위한 id 값 부여*/
+        #postingbtn {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            height: 55px;
+            margin-bottom: 16px;
         }
 
-        .mybtn>button {
-            margin-right: 5px;
+
+
+
+
+
+
+        /* 댓글 테이블 스타일*/
+        table {
+            width: 70%;
+            border-collapse: separate;
+            border-spacing: 10;
+            margin: 20px auto;
+            border: none;
+            border-radius: 5px;
+            overflow: hidden;
+
+        }
+
+        table th,
+        table td {
+            border: 0.5px solid black;
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+
+
+        }
+
+
+        /*짝수줄, 홀수줄 마다 색을 다르게 함, 타이틀 바 색깔 설정*/
+        thead {
+            background-color: #6d4f2c;
+            color: white;
+        }
+
+
+
+        /* 댓글 내용과 삭제 버튼 정렬 */
+        .comment-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+
+        /*댓글 페이지 뒷 배경 설정*/
+        .comment-space {
+            background-image: url(https://i.pinimg.com/1200x/a8/ef/cd/a8efcd85adf5fde3bb76832bea40fdd1.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            margin: 30px auto 0px auto;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+
+        }
+
+
+
+
+
+
+
+        /* 테이블의 작성자 스타일*/
+        .name-column {
+            width: 20%;
+
+        }
+
+        /*테이블의 내용 스타일*/
+        .content-column {
+            width: 70%;
+
+        }
+
+        /* 세 번째 컬럼의 테두리 제거 */
+        .action-column {
+            width: 10%;
+            text-align: center;
+            border: none;
+
+        }
+
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+
+
+        /*카드 스타일*/
+
+
+        /* 팝업 변경으로 임시 주석*/
+        /*body {
+            background-image: url('https://e1.pxfuel.com/desktop-wallpaper/722/214/desktop-wallpaper-micgael-wingender-on-yugioh-mago-negro-yu-gi-oh.jpg');
+
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }*/
+
+        .container {
+            width: 80%;
+            background: linear-gradient(180deg, rgba(13, 2, 168, 0.877) 0%, rgba(50, 127, 216, 0.947) 52%, rgba(0, 2, 60, 0.896796218487395) 100%);
+            display: flex;
+            flex: 1;
+            padding: 30px;
+            border: 2px solid rgb(0, 0, 0);
+            margin: 10px auto 0px auto;
+            box-sizing: border-box;
+
+
+        }
+
+        .left-side {
+            box-shadow: 0 0 10px 10px white;
+            margin-left: 100px;
+            background: linear-gradient(180deg, rgba(240, 154, 63, 0.877) 0%, rgba(227, 163, 66, 0.9472163865546218) 52%, rgba(181, 106, 0, 0.896796218487395) 100%);
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            border: 2px solid black;
+            box-sizing: border-box;
+
+        }
+
+        .right-side {
+
+            background-image: url('https://bbs.ruliweb.com/community/board/300546/read/2074992#');
+            box-shadow: 0 0 10px 10px white;
+            margin: 0px auto 0px auto;
+            background-color: rgb(241, 229, 206);
+            width: 40%;
+            padding: 10px;
+            border: 2px solid black;
+            box-sizing: border-box;
+
+        }
+
+        .name {
+
+            font-size: 40px;
+            color: #271600;
+            text-shadow: 2px 2px 2px #fff, -1px -1px 2px #666;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 20px;
+
+
+            text-align: center;
+            padding: 10px;
+            box-shadow: 3px 3px 3px 3px rgb(87, 50, 1);
+            border-radius: 5px;
+            border: 2px solid rgba(240, 154, 63, 0.021);
+        }
+
+
+        .photo {
+            background-color: linear-gradient(180deg, rgba(199, 103, 0, 0.877) 0%, rgba(227, 163, 66, 0.9472163865546218) 52%, rgba(181, 106, 0, 0.896796218487395) 100%);
+            width: 100%;
+            /* 너비를 부모 컨테이너에 맞춤 */
+            max-width: 500px;
+            /* 최대 너비 설정 */
+            height: auto;
+            /* 높이를 자동 조절 */
+            margin: 0px auto 30px auto;
+            padding: 7px;
+            border-radius: 3px;
+            box-shadow: 2px 2px 3px 2px;
+
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid rgb(0, 0, 0);
+        }
+
+        .photo img {
+            border-radius: 5px;
+            max-width: 100%;
+            /* 이미지 너비를 컨테이너에 맞춤 */
+            max-height: 400px;
+            /* 최대 높이 설정 */
+            object-fit: contain;
+            /* 이미지가 영역에 맞게 비율 유지 */
+        }
+
+
+
+        .intro {
+            background-color: rgba(241, 229, 206, 0.781);
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 100%;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .popup-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .popup-links li {
+            padding: 10px 0;
+        }
+
+        .popup-links li button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .footer {
+            padding: 10px;
+            text-align: center;
+            border-top: 2px solid black;
+            margin-top: 10px;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -81,6 +410,7 @@
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyA9pQiIwlqJTL-3TSQEZVLZ3UDHC9D16FY",
@@ -97,35 +427,435 @@
         const db = getFirestore(app);
 
 
+        $("#postingbtn").click(async function () { // 데이터를 넣기 위함 (특정 태그 클릭 시 실행)
+
+            let name = $('#name').val();
+            let comment = $('#comment').val();
+
+            let doc = {
+                'name': name,
+                'comment': comment,
+
+            }; // 넣고 싶은 데이터
+            await addDoc(collection(db, "comments"), doc);
+            alert('작성 되었습니다.');
+            window.location.reload();
+        })
+
+
+
+
+
+        $(document).ready(async function () {
+            let docs = await getDocs(collection(db, "comments"));
+            let commentCount = 0;
+
+            docs.forEach((doc) => {
+                commentCount++;
+                let row = doc.data();
+                let name = row['name'];
+                let comment = row['comment'];
+                let docId = doc.id;
+
+                let temp_html = `
+                    <tr id="comment-${docId}">
+                        <td>${name}</td>
+                        <td id="comment-area">${comment}
+                            </td>
+                            <td class="action-column"><button class="btn btn-danger" data-id="${docId}" id="delete-btn">삭제</button></td>
+                    </tr>
+                    
+                    
+                `;
+                $('#comments').append(temp_html);
+            });
+
+            if (commentCount === 0) {
+                $('table').hide();
+            } else {
+                $('table').show();
+            }
+        });
+
+
+        // 삭제 기능 구현
+        $(document).on('click', '#delete-btn', async function () {
+
+
+            let answer = confirm('정말로 삭제하시겠습니까?');
+            if (answer) {
+                let docId = $(this).data('id');
+                await deleteDoc(doc(db, "comments", docId));
+                $(`comment-${docId}`).remove();
+                alert('삭제되었습니다.');
+                window.location.reload();
+
+            }
+            else {
+                alert('삭제를 취소합니다.');
+            }
+
+
+
+
+        });
+
+
+
+        // 팝업 열기 및 닫기 기능
+        $(document).ready(function () {
+            // 팝업 열기 버튼 클릭 시 해당 팝업 열기
+            $(".open-popup").click(function () {
+                var targetPopup = $(this).data("target"); // data-target 속성에서 타겟 팝업 ID를 가져옴
+                $("#" + targetPopup).fadeIn(); // 해당 팝업을 보여줌
+            });
+
+            // 팝업 닫기 버튼 클릭 시 해당 팝업 닫기
+            $(".close-popup").click(function () {
+                var targetPopup = $(this).data("target"); // data-target 속성에서 타겟 팝업 ID를 가져옴
+                $("#" + targetPopup).fadeOut(); // 해당 팝업을 숨김
+            });
+        });
+
+
+
+
 
     </script>
 </head>
 
 <body>
+
+    <!--팝업 html 시작-->
+    <div id="popup-1" class="popup-overlay">
+        <div class="container">
+            <div class="left-side">
+                <div class="name"><strong>
+                        <코딩경험자> 박태우
+                    </strong></div>
+
+                <div class="star">
+                    <p style="text-align: right;"> ⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                </div>
+
+                <div class="photo"><img
+                        src="https://velog.velcdn.com/images/hoon09231/post/9e60307c-f58c-4121-b625-913601c145ca/image.jpg"
+                        class="card-img-top" alt="..."></div>
+
+                <div class="intro">
+                    <p> <strong>위 사진은 바다에서 찍은 사진으로 평소의 밝은 분위기와 잘 맞는다.</strong></p>
+                    <p> <strong>경사남넷의 일원답게 광안리에서 찍은듯하다.</strong></p>
+
+
+
+                </div>
+
+            </div>
+
+            <div class="right-side">
+                <ul class="popup-links">
+                    <li>
+                        <underline><strong>자기소개</strong></underline>
+                    </li>
+                    <li></li>
+                    <li></li>
+
+                </ul>
+
+            </div>
+            <button class="close-popup btn btn-danger" data-target="popup-1"
+                style=" width: 50px;height: 50px;">X</button>
+        </div>
+
+    </div>
+
+    <div id="popup-2" class="popup-overlay">
+        <div class="container">
+            <div class="left-side">
+                <div class="name"><strong>
+                        <왕초보> 윤영한
+                    </strong></div>
+
+                <div class="star">
+                    <p style="text-align: right;"> ⭐⭐⭐⭐</p>
+                </div>
+
+                <div class="photo"><img
+                        src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2Fc8f1128c-5dff-4b8e-b14d-5601fcbaf7fe%2Fimage.png?table=block&id=46c1aaff-51e6-4f59-acb1-d84b5967168f&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1020&userId=d2e0c7cf-5631-403d-a610-54987eb2f7c3&cache=v2"
+                        class="card-img-top" alt="..."></div>
+
+                <div class="intro">
+                    <p> <strong>위 사진은 바다에서 찍은 사진으로 평소의 밝은 분위기와 잘 맞는다.</strong></p>
+                    <p> <strong>경사남넷의 일원답게 광안리에서 찍은듯하다.</strong></p>
+
+                    <div class="buttons">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="right-side">
+                <ul class="popup-links">
+                    <li>
+                        <underline><strong>자기소개</strong></underline>
+                    </li>
+                    <li></li>
+                    <li></li>
+
+                </ul>
+
+            </div>
+            <button class="close-popup btn btn-danger" data-target="popup-2"
+                style=" width: 50px;height: 50px;">X</button>
+
+        </div>
+    </div>
+
+    <div id="popup-3" class="popup-overlay">
+        <div class="container">
+            <div class="left-side">
+                <div class="name"><strong>
+                        <입문> 이지훈
+                    </strong></div>
+
+                <div class="star">
+                    <p style="text-align: right;"> ⭐⭐⭐⭐</p>
+                </div>
+
+                <div class="photo"><img
+                        src="https://teamsparta.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2F97e76ede-9f9d-4a77-a0f0-4b068d201d77%2FKakaoTalk_20240805_150046392.jpg?table=block&id=d02d62fd-1983-445e-b251-4f497dc3de8a&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=580&userId=&cache=v2"
+                        class="card-img-top" alt="..."></div>
+
+                <div class="intro">
+                    <p> <strong>위 사진은 바다에서 찍은 사진으로 평소의 밝은 분위기와 잘 맞는다.</strong></p>
+                    <p> <strong>경사남넷의 일원답게 광안리에서 찍은듯하다.</strong></p>
+
+                    <div class="buttons">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="right-side">
+                <ul class="popup-links">
+                    <li>
+                        <underline><strong>자기소개</strong></underline>
+                    </li>
+                    <li></li>
+                    <li></li>
+
+                </ul>
+
+            </div>
+            <button class="close-popup btn btn-danger" data-target="popup-3"
+                style=" width: 50px;height: 50px;">X</button>
+
+        </div>
+    </div>
+    <div id="popup-4" class="popup-overlay">
+        <div class="container">
+            <div class="left-side">
+                <div class="name"><strong>
+                        <초보> 조성준
+                    </strong></div>
+
+                <div class="star">
+                    <p style="text-align: right;"> ⭐⭐⭐⭐⭐⭐⭐</p>
+                </div>
+
+                <div class="photo">
+                    <img src="https://velog.velcdn.com/images/hoon09231/post/0171d9dc-bbff-4f34-8e29-71c2744fa0d6/image.jpg"
+                        class="card-img-top" alt="...">
+                </div>
+
+                <div class="intro">
+                    <p> <strong>위 사진은 밤에 </strong></p>
+                    <p> <strong>경사남넷의 일원답게 광안리에서 찍은듯하다.</strong></p>
+
+                    <div class="buttons">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="right-side">
+                <ul class="popup-links">
+                    <li>
+                        <underline><strong>자기소개</strong></underline>
+                    </li>
+                    <li></li>
+                    <li></li>
+
+                </ul>
+
+            </div>
+            <button class="close-popup btn btn-danger" data-target="popup-4"
+                style=" width: 50px;height: 50px;">X</button>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- 팝업 html 끝 -->
+
+
+
+
+
+
+
+
+
+
+
     <div class="mytitle">
         <h1>경 사 남 넷</h1>
 
     </div>
 
-    <div style="margin-bottom: 200px">
-        <h2>밈 사진</h2>
+    <div class="meam">
     </div>
+    <!-- 팀원 자기소개 카드 부분 style을 최적화를 못해서 따로말해주시면 제가 바꾸겠습니다.-->
+    <div class="miniinfo">
+        <div class="row row-cols-1 row-cols-md-5 g4">
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title"
+                    style="border: 3px outset; background-color: rgb(216, 156, 83); text-align:center">박 태 우</h5>
+                <p class="star" style="text-align: right;">⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/4022d0df-f4ea-478e-a1c0-0406e22cf659/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text"
+                        style="border: 3px outset; background-color: beige; height: 50px; font-size: 200%; text-align:center">
+                        개발 딱 대!
+                    </p>
+                    <button class="open-popup" data-target="popup-1"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
+                        DEF/?</button>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title"
+                    style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">윤 영 한</h5>
+                <p class="star" style="text-align: right;">⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/5441ae79-fe00-439f-a255-9fdec2d26d96/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text"
+                        style="border: 3px outset; background-color: beige;height: 50px; font-size: 150% ">뜨겁게 간다. 화상주의
+                    </p>
+                    <button class="open-popup" data-target="popup-2"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
+                        DEF/?</button>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title"
+                    style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">이 지 훈</h5>
+                <p class="star" style="text-align: right;">⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/2b3cc818-dbd5-45f5-888e-9271a0201bd1/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text"
+                        style="border: 3px outset; background-color: beige;height: 50px; font-size: 200%; text-align:center">
+                        헤 으 응
+                    </p>
+                    <button class="open-popup" data-target="popup-3"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
+                        DEF/?</button>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
+                <h5 class="card-title"
+                    style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">조 성 준</h5>
+                <p class="star" style="text-align: right;">⭐⭐⭐⭐⭐⭐⭐</p>
+                <img src="https://velog.velcdn.com/images/lionjojo/post/1bf1f5a8-da42-4d5c-b8e6-d01e6795eb5c/image.png"
+                    class="card-img-top" alt="..." style="border: 3px outset;">
+                <div class="card-body" style="border: 3px outset;">
+                    <p class="card-text"
+                        style="border: 3px outset; background-color: beige;height: 50px; font-size: 130% ">이 카드는 그냥 개발을
+                        잘함
+                    </p>
+                    <button class="open-popup" data-target="popup-4"
+                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
+                        DEF/?</button>
+                </div>
+            </div>
 
-    <div style="margin-bottom: 200px">
-        <h2>각자 소개 카드</h2>
+        </div>
     </div>
-
-    <div style="margin-bottom: 200px">
-        <h2>팀설명</h2>
+    <!-- 팀 설명란 CSS는 자유롭게 바꾸시면될거같습니다.-->
+    <div class="teaminfo">
+        <h2 style="border: 3px outset;background-color: rgb(230, 129, 7);">팀 설 명</h2>
+        <h2>경상도와 경기도라는 먼 지역에서 만났지만 마치 예전부터 알고 지냈던 사람처럼 화목하게 지내면서 프로젝트에 열정적으로 참여하는 모습에 이렇게 만난 것이 행운이 아닌가 싶은 기쁜 마음에
+            ‘경사났네’를 표현하는 말입니다. 그리고 팀명을 통해서 좋은 결과를 만들어 내자는 각오를 의미하고 있습니다. </h2>
     </div>
-
-    <div style="margin-bottom: 200px">
+    <!-- 목표부분.-->
+    <div clsas="goal">
         <h2>목표나 한마디</h2>
+        <h3>
+            <pre>
+박태우:
+윤영한:
+이지훈:
+조성준:
+            </pre>
+        </h3>
+    </div>
+    <!-- 팀규칙 부분.-->
+    <div class="teamPromise">
+        <h2>우리팀의 규칙</h2>
+        <h3>
+            <pre>
+1. 정해진 시간약속 잘지키기
+2. 모르는 내용은 항상 물어보기
+3. 자신의 상황을 팀원들과 공유하기
+4. 수업시간동안은 코딩의 집중하기
+5. 최대한 수업 안빠지기 개근하기
+</h3></pre>
     </div>
 
-    <div>
-        <h2>댓글</h2>
-    </div>
+
+
+    <!-- 방명록기능-->
+    <div class="comment-space">
+        <div>
+            <h2 style="text-align: center; margin-bottom: 100px;">댓글</h2>
+            <div class="commentingbox" id="commentbox">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="이름 또는 닉네임">
+                    <label for="floatingInput">이름 또는 닉네임</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="comment" placeholder="댓글 작성">
+                    <label for="floatingInput">댓글</label>
+                </div>
+                <div class="mybtn">
+                    <button id="postingbtn" type="button" class="btn btn-primary">작성하기</button>
+                </div>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="name-column">🙂작성자</th>
+                    <th class="content-column">📖내용</th>
+                </tr>
+            </thead>
+            <tbody id="comments">
+
+            </tbody>
+        </table>
+</body>
+
+</html>
+</div>
 </body>
 
 </html>
