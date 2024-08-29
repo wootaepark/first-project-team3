@@ -195,12 +195,12 @@
         .comment-space {
             background-image: url(https://i.pinimg.com/1200x/a8/ef/cd/a8efcd85adf5fde3bb76832bea40fdd1.jpg);
             background-size: cover;
-            
+
             background-attachment: scroll;
             margin: -20px auto 0px auto;
             width: 100%;
             padding: 20px;
-           
+
 
         }
 
@@ -403,24 +403,139 @@
         }
 
         /*우리팀의 규칙*/
-        .teamPromise {
+        #container {
+            border: 1px solid blue;
+            height: 280px;
+            text-align: center;
             background-size: 100%;
-            background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc7iC2r%2FbtsJhQzs1KX%2FRF6LdwOkIXDmYS6WjioQu0%2Fimg.png);
+
+
+
+            display: flex;
+        }
+
+        #box-left {
+            background-image: url(https://boatcraft.co.kr/data/file/005_01_01_01/9f30bbd1474b2729a6235305efa328a7.jpeg
+);
             background-position: center;
 
+            background-size: cover;
+            height: auto;
+            flex: 2;
         }
 
+        #box-center {
+            background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc7iC2r%2FbtsJhQzs1KX%2FRF6LdwOkIXDmYS6WjioQu0%2Fimg.png);
+            background-position: center;
+            background-size: cover;
+            flex: 2;
+
+
+
+
+
+        }
+
+        #box-right {
+            background-image: url(https://blog.kakaocdn.net/dn/bQfwfS/btsJhRsSaNX/0wZGVSvALsvoFbb5CmT01K/img.gif
+);
+            background-position: center;
+
+            background-size: cover;
+            flex: 2;
+            text-align: right;
+        }
+
+    
+
         .goal-comment {
-            
+
             min-width: 320px;
             min-height: 300px;
-            
+
         }
+
         .goal-comment img {
             width: auto;
             height: 1000%;
             object-fit: cover;
-            max-width: 320px; /* 이미지가 너무 커지지 않도록 최대 너비를 설정합니다. */
+            max-width: 320px;
+            /* 이미지가 너무 커지지 않도록 최대 너비를 설정합니다. */
+        }
+
+        .card {
+            width: 18.2rem;
+            border: 3px outset;
+            background-color: rgb(230, 129, 7);
+            position: relative;
+            perspective-origin: center;
+            transition: transform 0.3s;
+            transform: perspective(800px) rotateY(0deg);
+            transform-style: preserve-3d;
+
+        }
+
+        .card-title {
+            background-color: rgb(216, 156, 83);
+            text-align: center;
+            margin-top: 2%;
+            border-width: 3px 3px 3px 3px;
+            border-style: outset;
+        }
+
+        .card-text {
+            height: 50px;
+            font-size: 200%;
+            text-align: center
+        }
+
+        .card-img-top {
+            border-width: 3px 3px 1px 3px;
+            border-style: outset;
+        }
+
+        .card-body {
+            border-width: 3px 3px 1px 3px;
+            border-style: outset;
+            background-color: beige;
+            height: 110px;
+        }
+
+        .open-popup {
+            border: 3px outset;
+            margin-bottom: 3%;
+            height: 20px;
+            display: flex;
+            font-size: 10px;
+            float: right;
+            color: black;
+            background-color: beige;
+
+        }
+
+        .card:hover {
+            transform: perspective(800px) rotateY(180deg);
+        }
+
+        .card>* {
+            backface-visibility: hidden;
+        }
+
+        .front {
+            border: 3px outset;
+            background-image: url(https://i2.ruliweb.com/img/5/5/2/E/552E46D43576B10006);
+            background-position: center;
+            margin-top: 0.75%;
+            background-size: 140%;
+            height: 450px;
+            width: 260px;
+            backface-visibility: hidden;
+            position: absolute;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -431,7 +546,7 @@
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyA9pQiIwlqJTL-3TSQEZVLZ3UDHC9D16FY",
@@ -452,7 +567,10 @@
 
             let name = $('#name').val();
             let comment = $('#comment').val();
-
+            if(!name || !comment){
+                alert('작성자와 내용을 모두 적어주세요!');
+                return;
+            }
             let doc = {
                 'name': name,
                 'comment': comment,
@@ -468,10 +586,14 @@
 
 
         $(document).ready(async function () {
-            let docs = await getDocs(collection(db, "comments"));
+            const q = query(collection(db, "comments"), orderBy("name", "asc"));
+            const querySnapshot = await getDocs(q);
+
+
+            $('#comments').empty();
             let commentCount = 0;
 
-            docs.forEach((doc) => {
+            querySnapshot.forEach((doc) => {
                 commentCount++;
                 let row = doc.data();
                 let name = row['name'];
@@ -652,7 +774,11 @@
                     <h3>자기소개 한마디</h3>
                     <p>&ensp;과거의 자신보다 한 걸음 더 나아가는 것을 좋아합니다. 문학과 운동을 삶의 원동력으로 살아가고 있습니다. 주로 일과가 끝나면 헬스장에 가서 운동을 하고 자기 전에
                         독서를 하는 게 저의 일상입니다. 책은 문학 계열을 좋아하고 가장 좋아하는 작가는 [노르웨이의 숲]의 무라카미 하루키입니다. 하루키가 매일 달리기를 하고 글을 쓰는 것처럼
-                        코딩도 저에게 있어서 일상으로 만들어 가기 위해 노력하겠습니다.
+                        코딩도 저에게 있어서 일상으로 만들어 가기 위해 노력하겠습니다.<br>
+                        제가 추구하는 스타일은 하나의 문제를 가지고 여러 의견을 주고받으며 열정적으로 참여하는 것입니다. 그리고 늘 아침에 해야 할 과업을 미리 정한 뒤에 그것을 완수하기 위해
+                        행동하는 것을 선호합니다.
+                        저의 강점은 밝은 에너지입니다. 덕분에 처음 보는 사람들과도 금방 어울릴 수가 있으며 저의 분위기가 팀원 간의 좋은 시너지를 불러일으킵니다. 팀워크가 중요한 프로젝트에서
+                        저의 능력을 발휘하여 최선을 다하겠습니다.
 
                 </ul>
 
@@ -706,12 +832,11 @@
                     <p>https://velog.io/@hoon09231/posts</p>
 
                     <h3>자기소개 한마디</h3>
-                    <p>
-                        분위기 맞춰서 눈치껏 행동함. <br>
-                        <br>
-                        자기계발서 읽는 것을 좋아함. <br>
-                        <br>
-                        활발한 분위기를 좋아하는 편.
+                    <p>&ensp;제가 선호하는 업무 스타일은 항상 상대방을 존중하는 것입니다. 타인을 배려하고 깊은 생각을 선호하는 것이 저의 강점이라고 생각해 협업을 통해 원인 분석 및 문제
+                        해결에 큰 도움을 줄 수 있다고 생각합니다.
+                        <br>&ensp;그리고 장시간 동안 업무를 진행하는 것보다 짧게 휴식을 바탕으로 집중을 유지하는 것이 저의 특기입니다. 따라서 중간에 팀원들과 소통할 때 더 집중이 잘
+                        되어 적극적인 의사소통을 바탕으로 일을 해결해 나가는 것을 좋아합니다.
+
                     </p>
                 </ul>
 
@@ -759,9 +884,9 @@
                     <p>ISTJ </p>
 
                     <h3>취미</h3>
-                    <p>- 친구들과 같이 게임하거나 여행을 다니고 술을마시는 등 누군가와 함께 좋은걸 공유하는걸 좋아합니다.<br>
+                    <p> 친구들과 같이 게임하거나 여행을 다니고 술을마시는 등 누군가와 함께 좋은걸 공유하는걸 좋아합니다.<br>
                         <br>
-                        - 무언가 원리를 찾아내고 조립하고 완성해내는걸 좋아합니다. 그래서 코딩을 택하게 된것 같습니다.
+                        무언가 원리를 찾아내고 조립하고 완성해내는걸 좋아합니다. 그래서 코딩을 택하게 된것 같습니다.
                     </p>
 
                     <h3>블로그</h3>
@@ -769,9 +894,13 @@
 
                     <h3>자기소개 한마디</h3>
                     <p>
-                        - 게임개발사에서 일을하다 계약사정으로 인해 다른곳에서 일을하던 중 다시 개발자가 하고싶어 이번캠프로 돌아왔습니다. 다시 돌아온만큼 본캠프에서도 노력하려합니다.<br>
-                        <br>
-                        - 흥미를 가진걸 최대한 파내려가는걸 좋아합니다. 코딩과 부트캠프도최대한 흥미를 잃지않고 열심히 화이팅!!
+                        &ensp;게임개발사에서 일을하다 계약사정으로 인해 다른곳에서 일을하던 중 다시 개발자가 하고싶어 이번 캠프로 돌아왔습니다. 다시 돌아온만큼 본캠프에서도
+                        노력하려합니다.<br>
+                        &ensp;저는 문제를 해결했을 때 내가 낸 답안이 적절한지 생각해 보고 남들과 의견을 주고받고 더 좋은 해답이 있는지 토론하는 것을 좋아합니다. <br>
+                        &ensp;그래서 항상 제의 답안이 절대적인 정답이라고 생각해 넘어가지 않고 다양한 측면으로 접근하려고 노력합니다. 팀원들과 각자의 의견을 들어보고 이유와 근거를 바탕으로
+                        다양한 문제 접근을 고민하는 것을 선호합니다. 마지막으로 기간 안에 최상의 퀄리티를 만들려고 주어진 임무에 최선을 다하는 것을 좋아해 프로젝트에 큰 책임감을 가지고
+                        참여하겠습니다.<br>
+                        코딩과 부트캠프도최대한 흥미를 잃지않고 열심히 화이팅!!
                     </p>
 
                 </ul>
@@ -809,75 +938,81 @@
     <!-- 팀원 자기소개 카드 부분 style을 최적화를 못해서 따로말해주시면 제가 바꾸겠습니다.-->
     <div class="miniinfo">
         <div class="row row-cols-1 row-cols-md-5 g4">
-            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
-                <h5 class="card-title"
-                    style="border: 3px outset; background-color: rgb(216, 156, 83); text-align:center">박 태 우</h5>
-                <p class="star" style="text-align: right;">⭐⭐⭐⭐⭐⭐⭐⭐</p>
-                <img src="https://velog.velcdn.com/images/lionjojo/post/4022d0df-f4ea-478e-a1c0-0406e22cf659/image.png"
-                    class="card-img-top" alt="..." style="border: 3px outset;">
-                <div class="card-body" style="border: 3px outset;">
-                    <p class="card-text"
-                        style="border: 3px outset; background-color: beige; height: 50px; font-size: 200%; text-align:center">
-                        개발 딱 대!
-                    </p>
-                    <button class="open-popup" data-target="popup-1"
-                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
-                        DEF/?</button>
+            <div class="card">
+                <div class="front">
+                </div>
+                <div class="back">
+                    <h5 class="card-title">박 태 우</h5>
+                    <p class="star" style="text-align: right;">⭐⭐⭐⭐⭐⭐⭐⭐</p>
+                    <img src="https://velog.velcdn.com/images/lionjojo/post/4022d0df-f4ea-478e-a1c0-0406e22cf659/image.png"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">
+                            개발 딱 대!
+                        </p>
+                        <button class="open-popup" data-target="popup-1">ATK/?
+                            DEF/?</button>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
-                <h5 class="card-title"
-                    style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">윤 영 한</h5>
-                <p class="star" style="text-align: right;">⭐⭐⭐⭐</p>
-                <img src="https://velog.velcdn.com/images/lionjojo/post/5441ae79-fe00-439f-a255-9fdec2d26d96/image.png"
-                    class="card-img-top" alt="..." style="border: 3px outset;">
-                <div class="card-body" style="border: 3px outset;">
-                    <p class="card-text"
-                        style="border: 3px outset; background-color: beige;height: 50px; font-size: 150% ">뜨겁게 간다. 화상주의
-                    </p>
-                    <button class="open-popup" data-target="popup-2"
-                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
-                        DEF/?</button>
+            <div class="card">
+                <div class="front">
+                </div>
+                <div class="back">
+                    <h5 class="card-title">윤 영 한</h5>
+                    <p class="star" style="text-align: right;">⭐⭐⭐⭐</p>
+                    <img src="https://velog.velcdn.com/images/lionjojo/post/5441ae79-fe00-439f-a255-9fdec2d26d96/image.png"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text" style="font-size: 130%">뜨겁게 간다. 화상주의
+                        </p>
+                        <button class="open-popup" data-target="popup-2">ATK/?
+                            DEF/?</button>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
-                <h5 class="card-title"
-                    style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">이 지 훈</h5>
-                <p class="star" style="text-align: right;">⭐⭐⭐⭐</p>
-                <img src="https://velog.velcdn.com/images/lionjojo/post/2b3cc818-dbd5-45f5-888e-9271a0201bd1/image.png"
-                    class="card-img-top" alt="..." style="border: 3px outset;">
-                <div class="card-body" style="border: 3px outset;">
-                    <p class="card-text"
-                        style="border: 3px outset; background-color: beige;height: 50px; font-size: 200%; text-align:center">
-                        헤 으 응
-                    </p>
-                    <button class="open-popup" data-target="popup-3"
-                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
-                        DEF/?</button>
+            <div class="card">
+                <div class="front">
+                </div>
+                <div class="back">
+                    <h5 class="card-title">이 지 훈</h5>
+                    <p class="star" style="text-align: right;">⭐⭐⭐⭐</p>
+                    <img src="https://velog.velcdn.com/images/lionjojo/post/2b3cc818-dbd5-45f5-888e-9271a0201bd1/image.png"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">
+                            헤 으 응
+                        </p>
+                        <button class="open-popup" data-target="popup-3">ATK/?
+                            DEF/?</button>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="width: 18rem; border: 3px outset; background-color: rgb(230, 129, 7);">
-                <h5 class="card-title"
-                    style="border: 3px outset;background-color: rgb(216, 156, 83); text-align:center">조 성 준</h5>
-                <p class="star" style="text-align: right;">⭐⭐⭐⭐⭐⭐⭐</p>
-                <img src="https://velog.velcdn.com/images/lionjojo/post/1bf1f5a8-da42-4d5c-b8e6-d01e6795eb5c/image.png"
-                    class="card-img-top" alt="..." style="border: 3px outset;">
-                <div class="card-body" style="border: 3px outset;">
-                    <p class="card-text"
-                        style="border: 3px outset; background-color: beige;height: 50px; font-size: 130% ">이 카드는 그냥 개발을
-                        잘함
-                    </p>
-                    <button class="open-popup" data-target="popup-4"
-                        style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
-                        DEF/?</button>
+            <div class="card">
+                <div class="front">
+                </div>
+                <div class="back">
+                    <h5 class="card-title">조 성 준</h5>
+                    <p class="star" style="text-align: right;">⭐⭐⭐⭐⭐⭐⭐</p>
+                    <img src="https://velog.velcdn.com/images/lionjojo/post/1bf1f5a8-da42-4d5c-b8e6-d01e6795eb5c/image.png"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text" style="font-size: 130% ">이 카드는 그냥 개발을
+                            잘함
+                        </p>
+                        <button class="open-popup" data-target="popup-4"
+                            style="height: 20px; display: flex; font-size: 10px; float: right; color: black; background-color: beige;">ATK/?
+                            DEF/?</button>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- 팀 설명란 CSS는 자유롭게 바꾸시면될거같습니다.-->
-    <div class="teaminfo">
-        <h2 style="border: 3px outset;background-color: rgb(230, 129, 7); text-align: center;">팀 설 명</h2>
+    <div class="teaminfo" style="border-width: 0px 3px 3px 3px; border-style: outset;">
+        <h2
+            style="border-width: 1px 1px 3px 1px; border-style: outset; background-color: rgb(230, 129, 7); text-align: center;">
+            팀 설 명</h2>
         <h2>
             경상도와 경기도라는 먼 지역에서 만났지만 마치 예전부터 알고 지냈던 사람처럼 화목하게 지내면서
             프로젝트에 열정적으로 참여하는 모습에 이렇게 만난 것이 행운이 아닌가 싶은 기쁜 마음에‘경사났네’를 표현니다.
@@ -888,11 +1023,13 @@
             임해야겠다고 표현했습니다.</h2>
     </div>
     <!-- 목표부분.-->
-    <div class="goal">
-        <h2 style="border: 3px outset;background-color: rgb(230, 129, 7);text-align: center; margin-bottom: 0px;">부트캠프에서의 다짐</h2>
+    <div class="goal" style="border-width: 1px 1px 3px 1px; border-style: outset;">
+        <h2
+            style="border-width: 1px 1px 3px 1px; border-style: outset; background-color: rgb(230, 129, 7);text-align: center; margin-bottom: 0px;">
+            부트캠프에서의 다짐</h2>
 
         <div class="goal-comment"><img style="float: left; height :300px ; width:auto; padding-top: 0px;" src="data:image/png;base64,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
-            " >
+            ">
             <h3>
                 <p>
                     &emsp;박태우 : 팀원간의 불화 없이 적극적인 소통을 통해 유망있는 개발자로서 같이 성장하고 싶습니다.<br>
@@ -909,13 +1046,12 @@
         </div>
     </div>
     <!-- 팀규칙 부분.-->
-    <div class="teamPromise">
-        <div style="float: right;"><img
-                src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fq5PLo%2FbtsJg88zcGU%2FOd95r79x6kg2kxA8XOyHRk%2Fimg.png"
-                height="210">
-        </div class="promise.comment">
-        <h2>우리팀의 규칙</h2>
-        <div class="teampromise">
+
+    <div id='container'>
+        <div id='box-left'></div>
+        <div id='box-center'>
+            <br>
+            <h2>우리팀의 규칙</h2>
             <h3>
                 <p>
                     &ensp;1. 정해진 시간약속 잘지키기<br>
@@ -926,14 +1062,20 @@
             </h3>
             </p>
         </div>
+        <div id='box-right'></div>
     </div>
 
+    <div class="good" style="border-width: 1px 1px 5px 1px; border-style: outset;">
+
+
+    </div>
+    <div class="teamPromise"></div>
 
 
     <!-- 방명록기능-->
     <div class="comment-space">
         <div>
-            <h2 style="text-align: center; margin-bottom: 100px; margin-top: 0;">✏️댓글</h2>
+            <h2 style="text-align: center; margin-bottom: 20px; margin-top: 50px;">✏️댓글</h2>
             <div class="commentingbox" id="commentbox">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="name" placeholder="이름 또는 닉네임">
