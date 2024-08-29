@@ -10,7 +10,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
-
+        /* 전체 폰트 적용 */
         * {
             font-family: "Jua", sans-serif;
             font-weight: 400;
@@ -61,10 +61,6 @@
 
             margin-top: 20px;
         }
-
-
-
-
 
         .mycards {
             width: 1200px;
@@ -261,19 +257,6 @@
 
 
         /*카드 스타일*/
-
-
-        /* 팝업 변경으로 임시 주석*/
-        /*body {
-            background-image: url('https://e1.pxfuel.com/desktop-wallpaper/722/214/desktop-wallpaper-micgael-wingender-on-yugioh-mago-negro-yu-gi-oh.jpg');
-
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }*/
-
         .container {
             width: 80%;
             background: linear-gradient(180deg, rgba(13, 2, 168, 0.877) 0%, rgba(50, 127, 216, 0.947) 52%, rgba(0, 2, 60, 0.896796218487395) 100%);
@@ -503,19 +486,6 @@
             margin-top: 0;
         }
 
-        @media screen and (max-width: 100%) {
-
-            /* 최대 창 크기가 아닌 경우 */
-            .goal-comment-text>h3 {
-                margin-top: auto;
-                /* margin-top을 자동으로 설정하여 윗부분이 잘리지 않도록 조정 */
-            }
-        }
-
-
-
-
-
 
         .card {
             width: 18.2rem;
@@ -644,7 +614,7 @@
 
 
 
-
+        // 댓글 조회 (getDocs) : name 오름차순 정렬
         $(document).ready(async function () {
             const q = query(collection(db, "comments"), orderBy("name", "asc"));
             const querySnapshot = await getDocs(q);
@@ -681,7 +651,7 @@
         });
 
 
-        // 삭제 기능 구현
+        // 댓글 삭제 기능 구현 (deleteDoc)
         $(document).on('click', '#delete-btn', async function () {
 
 
@@ -745,7 +715,7 @@
 
 
 
-
+        // 메뉴 바 버튼 스크롤 기능 구현 코드
         const navbarMenu = document.querySelector('.menu-bar');
         navbarMenu.addEventListener('click', (event) => {
             const target = event.target;
@@ -766,19 +736,14 @@
 
 
 
-
-
-
-
-
-
-
     </script>
 </head>
 
 <body>
 
     <!--팝업 html 시작-->
+
+    <!--팝업 카드 1-->
     <div id="popup-1" class="popup-overlay">
         <div class="container">
             <div class="left-side">
@@ -837,6 +802,8 @@
 
     </div>
 
+
+    <!--팝업 카드 2-->
     <div id="popup-2" class="popup-overlay">
         <div class="container">
             <div class="left-side">
@@ -898,6 +865,8 @@
         </div>
     </div>
 
+
+    <!--팝업 카드 3-->
     <div id="popup-3" class="popup-overlay">
         <div class="container">
             <div class="left-side">
@@ -955,6 +924,8 @@
 
         </div>
     </div>
+
+    <!--팝업 카드 4-->
     <div id="popup-4" class="popup-overlay">
         <div class="container">
             <div class="left-side">
@@ -1019,16 +990,17 @@
                 style=" width: 50px;height: 50px;">X</button>
         </div>
     </div>
-
-
-
     <!-- 팝업 html 끝 -->
 
 
+
+
+    <!--메인 페이지 시작 부분-->
     <div class="mytitle" id="mytitle">
         <h1>경 사 남 넷</h1>
-
     </div>
+
+    <!--스크롤 기능을 가진 버튼 에어리어-->
     <div class="menu-bar">
         <nav class="navbar bg-body-tertiary">
             <form class="container-fluid justify-content-start">
@@ -1045,15 +1017,21 @@
             </form>
         </nav>
     </div>
+
+
+    <!--위로 가기 스크롤 버튼-->
     <div style="position: fixed; bottom: 20px; right: -410px; z-index: 5;">
         <a href="#mytitle"><img src="https://cdn-icons-png.flaticon.com/512/55/55008.png" style="width: 15%;"
                 title="위로 가기"></a>
-
     </div>
 
+
+    <!--삼대장 사진 위치-->
     <div class="meam">
     </div>
-    <!-- 팀원 자기소개 카드 부분 style을 최적화를 못해서 따로말해주시면 제가 바꾸겠습니다.-->
+
+
+    <!--팀원 소개 카드 섹션-->
     <div class="miniinfo" id="miniinfo">
         <div class="row row-cols-1 row-cols-md-5 g4">
             <div class="card">
@@ -1126,7 +1104,11 @@
             </div>
         </div>
     </div>
-    <!-- 팀 설명란 CSS는 자유롭게 바꾸시면될거같습니다.-->
+    <!--팀원 카드 섹션 끝-->
+
+
+
+    <!--팀설명 에어리어-->
     <div class="teaminfo" id="teaminfo" style="border-width: 0px 3px 3px 3px; border-style: outset;">
         <h2
             style="border-width: 1px 1px 3px 1px; border-style: outset; background-color: rgb(230, 129, 7); text-align: center;">
@@ -1140,6 +1122,8 @@
             쉽지 않지만 굴하지 않고 제 자신이 비장의 카드처럼 잘 해낼 수 있다는 각오를 가지고 이번 캠프에
             임해야겠다고 표현했습니다.</h2>
     </div>
+
+
     <!-- 목표부분.-->
     <div class="goal" id="goal" style="border-width: 1px 1px 3px 1px; border-style: outset;">
         <h2
@@ -1164,12 +1148,12 @@
                     </p>
                 </h3>
             </div>
-
-
         </div>
     </div>
-    <!-- 팀규칙 부분.-->
 
+
+
+    <!-- 팀규칙 부분.-->
     <div id='container'>
         <div id='box-left'></div>
         <div id='box-center'>
@@ -1189,14 +1173,13 @@
         <div id='box-right'></div>
     </div>
 
+    <!--dump-->
     <div class="good" style="border-width: 1px 1px 5px 1px; border-style: outset;">
-
-
     </div>
 
 
 
-    <!-- 방명록기능-->
+    <!-- 방명록기능 (댓글)-->
     <div class="comment-space" id="comment-space">
         <div>
             <h2 style="text-align: center; margin-bottom: 20px; margin-top: 50px;">✏️댓글</h2>
