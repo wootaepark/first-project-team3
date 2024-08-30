@@ -218,8 +218,11 @@
 
         /*테이블의 내용 스타일*/
         .content-column {
-            width: 70%;
+            width: 50%;
 
+        }
+        .time-column{
+            width : 20%
         }
 
         /* 세 번째 컬럼의 테두리 제거 */
@@ -576,7 +579,7 @@
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { deleteDoc, doc, query, orderBy,serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyA9pQiIwlqJTL-3TSQEZVLZ3UDHC9D16FY",
@@ -604,6 +607,8 @@
             let doc = {
                 'name': name,
                 'comment': comment,
+                'timestamp': serverTimestamp(),
+
 
             }; // 넣고 싶은 데이터
             await addDoc(collection(db, "comments"), doc);
@@ -616,7 +621,7 @@
 
         // 댓글 조회 (getDocs) : name 오름차순 정렬
         $(document).ready(async function () {
-            const q = query(collection(db, "comments"), orderBy("name", "asc"));
+            const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
             const querySnapshot = await getDocs(q);
 
 
@@ -628,6 +633,8 @@
                 let row = doc.data();
                 let name = row['name'];
                 let comment = row['comment'];
+                let timestamp = row['timestamp'] ? row['timestamp'].toDate() : null;  // Firestore 타임스탬프를 JS Date로 변환
+                let formattedTime = timestamp ? timestamp.toLocaleString() : "N/A";  // 시간 포맷 설정
                 let docId = doc.id;
 
                 let temp_html = `
@@ -635,6 +642,7 @@
                         <td>${name}</td>
                         <td id="comment-area">${comment}
                             </td>
+                             <td>${formattedTime}</td>  <!-- 시간 표시 -->
                             <td class="action-column"><button class="btn btn-danger" data-id="${docId}" id="delete-btn">삭제</button></td>
                     </tr>
                     
@@ -1202,6 +1210,7 @@
                 <tr>
                     <th class="name-column">🙂작성자</th>
                     <th class="content-column">📖내용</th>
+                    <th class="time-column">⏰작성시간</th>
                 </tr>
             </thead>
             <tbody id="comments">
